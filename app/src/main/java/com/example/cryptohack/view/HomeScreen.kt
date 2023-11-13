@@ -1,6 +1,5 @@
 package com.example.cryptohack.view
 
-import android.os.CountDownTimer
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -20,7 +18,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,13 +27,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.cryptohack.network.CryptoCurrency
-import com.example.cryptohack.viewmodel.AssetsViewModel
 import kotlin.math.roundToInt
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun HomeScreen(viewModel: AssetsViewModel = viewModel()) {
-    val cryptos by viewModel.response.collectAsState()
+fun HomeScreen() {
+    val cryptos = listOf(CryptoCurrency("1", 1, "BTC", "Bitcoin", 2.0,2.0,2.0,2.0,2.0,2.0,2.0,""),
+        CryptoCurrency("2", 2, "ETH", "ETH", 2.0,2.0,2.0,2.0,2.0,2.0,2.0,""))
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -59,8 +55,6 @@ fun HomeScreen(viewModel: AssetsViewModel = viewModel()) {
                 DropdownMenuItem(text = { Text("MarketCap") }, onClick = { /*TODO*/ })
             }
         }
-
-        Button(onClick = { viewModel.loadData() }, content = { Text(text = "refresh")})
 
         LazyColumn {
             items(cryptos.size, key = { index -> cryptos[index].id }) {
@@ -86,3 +80,18 @@ fun CryptoRow(cryptoCurrency: CryptoCurrency) {
         Text(((cryptoCurrency.priceUsd * 100).roundToInt().toDouble() /100).toString(), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleLarge)
     }
 }
+
+/*
+fun loadData() {
+    val assetService = Asset
+    val scope = CoroutineScope(Job() + Dispatchers.IO)
+    try {
+        scope.launch {
+            val res = assetService.assetService.getAllAssets().data
+            println(res)
+        }
+    } catch (err: Error) {
+        println(err)
+    }
+}
+ */
