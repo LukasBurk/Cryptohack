@@ -31,8 +31,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.cryptohack.network.CryptoCurrency
 import com.example.cryptohack.viewmodel.AssetsViewModel
-import kotlin.math.roundToInt
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.cryptohack.viewmodel.SortBy
+import java.text.NumberFormat
+import java.util.Locale
 
 @Composable
 fun HomeScreen(viewModel: AssetsViewModel = viewModel()) {
@@ -55,8 +57,9 @@ fun HomeScreen(viewModel: AssetsViewModel = viewModel()) {
             DropdownMenu(
                 expanded = showMenu,
                 onDismissRequest = { showMenu = false }) {
-                DropdownMenuItem(text = { Text("Price") }, onClick = { /*TODO*/ })
-                DropdownMenuItem(text = { Text("MarketCap") }, onClick = { /*TODO*/ })
+                DropdownMenuItem(text = { Text("Rank") }, onClick = { viewModel.setSort(SortBy.Rank) })
+                DropdownMenuItem(text = { Text("Price") }, onClick = { viewModel.setSort(SortBy.Price) })
+                DropdownMenuItem(text = { Text("MarketCap") }, onClick = { viewModel.setSort(SortBy.MarketCap) })
             }
         }
 
@@ -83,6 +86,8 @@ fun CryptoRow(cryptoCurrency: CryptoCurrency) {
             Text(text = cryptoCurrency.name, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleLarge)
             Text(text = cryptoCurrency.symbol, style = MaterialTheme.typography.titleSmall)
         }
-        Text(((cryptoCurrency.priceUsd * 100).roundToInt().toDouble() /100).toString(), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleLarge)
+        val format = NumberFormat.getCurrencyInstance(Locale.US);
+        format.maximumFractionDigits = 4
+        Text(format.format(cryptoCurrency.priceUsd), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleLarge)
     }
 }
