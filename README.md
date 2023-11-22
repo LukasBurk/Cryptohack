@@ -32,9 +32,9 @@ val cryptos = listOf(CryptoCurrency("1", 1, "BTC", "Bitcoin", 2.0,2.0,2.0,2.0,2.
 
 1. Mithilfe von ViewModel sollen die Daten geladen werden in der UI
 2. Sortiere die Kryptos mithilfe des ViewModels nach
-   a. Preis
-   b. Rank
-   c. Marketcap
+    - Preis
+    - Rank
+    - Marketcap
 3. Automatische Aktualisierung alle 30 Sekunden
 
 ![img.png](img.png)
