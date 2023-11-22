@@ -24,8 +24,10 @@ fun loadData() {
 Aktuell werden Beispieldaten von der folgenden Liste abgerufen:
 
 ```kotlin 
-val cryptos = listOf(CryptoCurrency("1", 1, "BTC", "Bitcoin", 2.0,2.0,2.0,2.0,2.0,2.0,2.0,""),
-        CryptoCurrency("2", 2, "ETH", "ETH", 2.0,2.0,2.0,2.0,2.0,2.0,2.0,""))
+val cryptos = listOf(
+  CryptoCurrency("1", 1, "BTC", "Bitcoin", 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, ""),
+  CryptoCurrency("2", 2, "ETH", "ETH", 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, "")
+)
 ```
 
 ## Deine Aufgaben:
@@ -37,4 +39,5 @@ val cryptos = listOf(CryptoCurrency("1", 1, "BTC", "Bitcoin", 2.0,2.0,2.0,2.0,2.
     - Marketcap
 3. Automatische Aktualisierung alle 30 Sekunden
 
+### Mockup
 ![img.png](img.png)
